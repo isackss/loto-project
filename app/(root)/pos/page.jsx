@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { createNewTicket } from "@/lib/actions/ticket.action";
 import { useState } from "react";
 
 /* import DeleteIcon from "@mui/icons-material/Delete"; */
@@ -17,20 +18,17 @@ import { useState } from "react";
 
 export default function Pos() {
   const [numbers, setNumbers] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [soldTickets, setSoldTickets] = useState(() => {
-    const saved = localStorage.getItem("tickets");
+    const saved =
+      typeof window !== "undefined" ? localStorage.getItem("tickets") : "";
     const initialValue = saved ? JSON.parse(saved) : "";
     return initialValue || [];
   });
+  // Define your form
 
-  /* useEffect(() => {
-    const localData = JSON.parse(localStorage.getItem("tickets"));
-
-    if (localData) {
-      setSales(localData);
-    }
-  }, []); */
-
+  // Define submit handler
   const cartHandleSubmit = (e) => {
     const input = e.currentTarget.elements.number.value;
     const serie = e.currentTarget.elements.serie.value;
@@ -45,10 +43,18 @@ export default function Pos() {
         { _id: `${serie}${input}`, num: input, serie },
       ]);
     }
+    createNewTicket({});
     e.preventDefault();
   };
+  /* useEffect(() => {
+    const localData = JSON.parse(localStorage.getItem("tickets"));
 
-  console.log(`Nombers: `, numbers);
+    if (localData) {
+      setSales(localData);
+    }
+  }, []); */
+
+  /* console.log(`Nombers: `, numbers); */
 
   const cartItemDelete = (e) => {
     const itemId = e.currentTarget.id;
@@ -81,8 +87,8 @@ export default function Pos() {
       localStorage.setItem("tickets", JSON.stringify(soldTickets));
     }
   };
-  console.log(`From useState: `, soldTickets);
-  console.log(`From localStorage: `, JSON.parse(localStorage.getItem("sales")));
+  /* console.log(`From useState: `, soldTickets);
+  console.log(`From localStorage: `, JSON.parse(localStorage.getItem("sales"))); */
   return (
     <main className="h-svh p-4">
       <section className="relative h-svh">
