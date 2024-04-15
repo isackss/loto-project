@@ -1,5 +1,6 @@
 "use client";
 
+import PosForm from "@/components/forms/PosForm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -91,6 +92,9 @@ export default function Pos() {
   console.log(`From localStorage: `, JSON.parse(localStorage.getItem("sales"))); */
   return (
     <main className="h-svh p-4">
+      <div>
+        <PosForm />
+      </div>
       <section className="relative h-svh">
         <form onSubmit={cartHandleSubmit}>
           <div>
