@@ -2,10 +2,10 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { PosSchema } from "@/lib/validations";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
@@ -15,7 +15,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const PosForm = () => {
   // 1. Define your form.
@@ -23,6 +29,7 @@ const PosForm = () => {
     resolver: zodResolver(PosSchema),
     defaultValues: {
       username: "",
+      numbers: [],
     },
   });
 
@@ -32,22 +39,82 @@ const PosForm = () => {
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
+
+  // Define Add to cart
+
+  const addNumberToCart = (e, field) => {
+    if (field.name === "number") {
+      e.preventDefault();
+
+      const numberInput = e.target;
+      const numberValue = numberInput.value;
+
+      alert(numberValue);
+    }
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex w-full flex-col gap-10"
+      >
         <FormField
           control={form.control}
           name="username"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
+            <FormItem className="flex w-full flex-col">
+              <FormLabel className="paragraph-semibold text-dark400_light800">
+                Serie
+              </FormLabel>
+              <FormControl className="mt-3.5">
+                {/* <Input
+                  className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
+                  {...field}
+                /> */}
+                <Select>
+                  <SelectTrigger className="background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="paragraph-regular background-light900_dark300 text-dark300_light700">
+                    <SelectItem value="A">A</SelectItem>
+                    <SelectItem value="B">B</SelectItem>
+                    <SelectItem value="C">C</SelectItem>
+                    <SelectItem value="D">D</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormControl>
-              <FormDescription>
-                This is your public display name.
+              <FormDescription className="body-regular mt-2.5 text-light-500">
+                Selecciona una serie para cada número.
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="text-red-500" />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="number"
+          render={({ field }) => (
+            <FormItem className="flex w-full flex-col">
+              <FormLabel className="paragraph-semibold text-dark400_light800">
+                Número.
+              </FormLabel>
+              <FormControl className="mt-3.5">
+                <div className="flex">
+                  <Input
+                    type="number"
+                    className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
+                    {...field}
+                  />
+                  <Button onClick={(e) => addNumberToCart(e, field)}>
+                    Agregar
+                  </Button>
+                </div>
+              </FormControl>
+              <FormDescription className="body-regular mt-2.5 text-light-500">
+                Introduce el número que deseas vender.
+              </FormDescription>
+              <FormMessage className="text-red-500" />
             </FormItem>
           )}
         />
