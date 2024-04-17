@@ -1,4 +1,4 @@
-import { Schema, models, model, Document } from "mongoose";
+import { Schema, models, model } from "mongoose";
 
 const TicketSaleSchema = new Schema({
   numbers: [{ type: Schema.Types.ObjectId, ref: "Numbers" }],
@@ -7,3 +7,7 @@ const TicketSaleSchema = new Schema({
   terminalId: [{ type: Schema.Types.ObjectId, ref: "Terminal" }],
   lotteryId: [{ type: Schema.Types.ObjectId, ref: "Lottery" }],
 });
+
+const Ticket = models.Ticket || model("Question", TicketSaleSchema);
+
+export default Ticket;
