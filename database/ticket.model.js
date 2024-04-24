@@ -1,7 +1,7 @@
 import { Schema, models, model } from "mongoose";
 
 const TicketSaleSchema = new Schema({
-  numbers: [{ type: Schema.Types.ObjectId, ref: "Numbers" }],
+  plays: [{ type: Schema.Types.ObjectId, ref: "Play" }],
   soldNumbers: { type: Number },
   ticketPrice: { type: Number },
   terminalId: [{ type: Schema.Types.ObjectId, ref: "Terminal" }],

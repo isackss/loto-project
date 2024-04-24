@@ -1,6 +1,6 @@
 import { Schema, models, model } from "mongoose";
 
-const NumberSchema = new Schema({
+const PlaySchema = new Schema({
   number: { type: String },
   serie: { type: String },
   ticket: [{ type: Schema.Types.ObjectId, ref: "Ticket" }],
@@ -9,6 +9,6 @@ const NumberSchema = new Schema({
   lotteryId: [{ type: Schema.Types.ObjectId, ref: "Lottery" }],
 });
 
-const Number = models.Number || model("Number", NumberSchema);
+const Play = models.Play || model("Play", PlaySchema);
 
-export default Number;
+export default Play;

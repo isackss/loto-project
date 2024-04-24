@@ -1,6 +1,4 @@
 import { Schema, models, model } from "mongoose";
-import { unique } from "next/dist/build/utils";
-import { number, string } from "zod";
 
 const UserSchema = new Schema({
   clerkId: { type: String, required: true },
