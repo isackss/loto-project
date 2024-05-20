@@ -1,12 +1,13 @@
 "use client";
 
 import { PosSchema } from "@/lib/validations";
-import { use, useState } from "react";
+import { useState } from "react";
 
 const PosForm = ({ mongoUserId }) => {
   const [playSerie, setPlaySerie] = useState("");
   const [plays, setPlays] = useState([]);
 
+  /* Agregar serie a la jugada */
   const handleAddSerie = (e) => {
     const serie = e.target.value;
     if (serie.length > 0) {
@@ -14,39 +15,44 @@ const PosForm = ({ mongoUserId }) => {
     }
   };
 
+  /* Agregar jugada a la lista */
   const handleAddPlay = (e) => {
     const playField = document.getElementById("play");
     const userPlay = playField.value;
     const date = Date.now();
 
-    if (playSerie.length > 0 && userPlay.length >= 0) {
-      setPlays((prev) => [
-        ...prev,
-        {
-          _id: `${date}${playSerie}${userPlay}`,
-          serie: playSerie,
-          play: userPlay,
-        },
-      ]);
+    if (playSerie.length > 0 && userPlay.length > 0) {
+      if (plays.find((el) => el.serie === playSerie && el.play === userPlay)) {
+        alert("Esta jugada ya existe!");
+      } else {
+        setPlays((prev) => [
+          ...prev,
+          {
+            _id: `${date}${playSerie}${userPlay}`,
+            serie: playSerie,
+            play: userPlay,
+          },
+        ]);
+      }
     }
 
     e.preventDefault();
   };
 
+  /* Eliminar jugada de la lista */
   const handlePlayDelete = (playId) => {
     const filteredPlays = plays.filter((el) => el._id !== playId);
 
     setPlays(filteredPlays);
-    console.log(filteredPlays);
   };
-  console.log(plays);
+
   return (
     <>
       <form className="flex flex-col gap-4">
         <div className="flex flex-col">
-          <label>Seleccione una serie</label>
+          <label className="text-dark300_light900">Seleccione una serie</label>
           <select
-            className="p-4"
+            className="rounded-md border p-4 shadow-md"
             name="serie"
             onChange={(e) => handleAddSerie(e)}
           >
@@ -57,9 +63,11 @@ const PosForm = ({ mongoUserId }) => {
             <option value="D">D</option>
           </select>
         </div>
-        <div className="flex">
+        <div className="flex flex-row gap-4">
           <div className="flex flex-auto flex-col">
-            <label>Introduzca la cifra a vender</label>
+            <label className="text-dark300_light900">
+              Introduzca la cifra a vender
+            </label>
             <input
               id="play"
               type="tel"
@@ -67,33 +75,39 @@ const PosForm = ({ mongoUserId }) => {
               maxLength={3}
               min={0}
               defaultValue="000"
-              className="p-4"
+              className="rounded-md border p-4 shadow-md"
             />
           </div>
           <button
-            className="border max-sm:px-6"
+            className="primary-gradient rounded-lg border text-light-900 max-sm:px-6"
             onClick={(e) => handleAddPlay(e)}
           >
             Agregar
           </button>
         </div>
       </form>
-      <div>
+      <div className="mt-4 flex flex-col gap-4 border p-4 shadow-md">
         {plays.map((play) => (
           <div
             key={play._id}
-            className="flex flex-row border px-2 pt-4 align-middle"
+            className="flex flex-row items-center border p-2 shadow-sm"
           >
-            <div className="flex-1">{`${play.serie} - ${play.play}`}</div>
+            <div className="text-dark300_light900 flex-1 font-mono text-2xl font-bold">{`${play.serie} - ${play.play}`}</div>
             <button
-              className="border bg-slate-600"
+              className="rounded-md border bg-slate-600 px-4 py-2 text-light-900"
               onClick={() => handlePlayDelete(play._id)}
             >
               Eliminar
             </button>
           </div>
         ))}
+        <div className="border p-4 text-center">
+          Jugadas totales: {plays.length}
+        </div>
       </div>
+      <button className="primary-gradient mt-6 w-full rounded-lg px-6 py-4 text-center text-light-900 max-sm:px-6">
+        Generar Ticket
+      </button>
     </>
   );
 };
