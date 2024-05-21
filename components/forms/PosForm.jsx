@@ -1,6 +1,6 @@
 "use client";
 
-import { PosSchema } from "@/lib/validations";
+/* import { PosSchema } from "@/lib/validations"; */
 import { useState } from "react";
 
 const PosForm = ({ mongoUserId }) => {
