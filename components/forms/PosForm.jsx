@@ -46,6 +46,10 @@ const PosForm = ({ mongoUserId }) => {
     setPlays(filteredPlays);
   };
 
+  /* Creación del ticket */
+
+  const handleTicketSubmit = () => {};
+
   return (
     <>
       <form className="flex flex-col gap-4">
@@ -79,7 +83,7 @@ const PosForm = ({ mongoUserId }) => {
             />
           </div>
           <button
-            className="primary-gradient rounded-lg border text-light-900 max-sm:px-6"
+            className="primary-gradient rounded-lg border px-6 text-light-900"
             onClick={(e) => handleAddPlay(e)}
           >
             Agregar
@@ -105,7 +109,11 @@ const PosForm = ({ mongoUserId }) => {
           Jugadas totales: {plays.length}
         </div>
       </div>
-      <button className="primary-gradient mt-6 w-full rounded-lg px-6 py-4 text-center text-light-900 max-sm:px-6">
+      <button
+        className={`mt-6 w-full rounded-lg px-6 py-4 text-center text-light-900 max-sm:px-6 ${plays.length > 0 ? "primary-gradient" : "bg-slate-400"}`}
+        disabled={plays.length > 0 ? false : true}
+        onClick={handleTicketSubmit}
+      >
         Generar Ticket
       </button>
     </>
