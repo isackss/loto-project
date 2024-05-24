@@ -17,10 +17,25 @@ const PosForm = ({ mongoUserId }) => {
 
   /* Agregar jugada a la lista */
   const handleAddPlay = (e) => {
+    e.preventDefault();
+
     const playField = document.getElementById("play");
-    const userPlay = playField.value;
+    let userPlay = playField.value;
     const date = Date.now();
 
+    /* Validar formato de jugada */
+    if (/^\d+$/.test(userPlay)) {
+      if (userPlay.length === 1) {
+        userPlay = "00" + userPlay;
+      } else if (userPlay.length === 2) {
+        userPlay = "0" + userPlay;
+      }
+    } else {
+      alert("Introduzca solo números");
+      return;
+    }
+
+    /* Validar si la jugada ya existe */
     if (playSerie.length > 0 && userPlay.length > 0) {
       if (plays.find((el) => el.serie === playSerie && el.play === userPlay)) {
         alert("Esta jugada ya existe!");
@@ -35,8 +50,6 @@ const PosForm = ({ mongoUserId }) => {
         ]);
       }
     }
-
-    e.preventDefault();
   };
 
   /* Eliminar jugada de la lista */
@@ -76,9 +89,8 @@ const PosForm = ({ mongoUserId }) => {
               id="play"
               type="tel"
               name="play"
-              maxLength={3}
+              maxLength="3"
               min={0}
-              defaultValue="000"
               className="rounded-md border p-4 shadow-md"
             />
           </div>
