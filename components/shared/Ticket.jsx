@@ -2,31 +2,27 @@
 
 import Image from "next/image";
 
-import lotoLogo from "@/assets/img/logo_loto.png";
-import { Ticket } from "@/Schema";
-import { useState } from "react";
+import lotoLogo from "@/public/assets/img/logo_loto.png";
+/* import { Ticket } from "@/Schema";
+import { useState } from "react"; */
 
 export default function Home() {
-  const ticket = new Ticket(
+  /*   const ticket = new Ticket(
     123,
     "A",
     "009",
     "02-23-2024",
     "28-02-2024",
     "LTM-1458"
-  );
-
-  const [tickets, setTickets] = useState(ticket);
+  ); */
 
   return (
     <div className="">
-      <div>
-        <div className="bg-gray-200 p-4 text-center text-2xl font-bold">
-          LOTERIA DE GUATEMALA
-        </div>
-        <div className="text-center">www.lotoelectronica.com</div>
+      <div className="text-center">
+        <div className="">LOTERIA DE GUATEMALA</div>
+        <div className="">www.lotoelectronica.com</div>
       </div>
-      <div className="p-1">
+      {/* <div className="p-1">
         <div className="text-center text-4xl">PRIMER PREMIO</div>
         <div className="text-center text-7xl font-bold">Q250,000</div>
       </div>
@@ -37,12 +33,36 @@ export default function Home() {
       <div className="p-1">
         <div className="text-center text-xl">TERCER PREMIO</div>
         <div className="text-center text-3xl font-bold">Q50,000</div>
-      </div>
-      <div className="flex justify-around gap-1 border-4 border-gray-300 bg-gray-200 p-5 font-extrabold">
-        <div className="text-5xl">A</div>
-        <div className="text-5xl">0</div>
-        <div className="text-5xl">0</div>
-        <div className="text-5xl">0</div>
+      </div> */}
+      <div className="flex flex-col gap-2">
+        <div className="flex justify-around gap-1 border-gray-300 bg-gray-100 p-3 font-extrabold">
+          <div className="text-2xl">A</div>
+          <div className="text-2xl">-</div>
+          <div className="text-2xl">0</div>
+          <div className="text-2xl">0</div>
+          <div className="text-2xl">0</div>
+        </div>
+        <div className="flex justify-around gap-1 border-gray-300 bg-gray-100 p-3 font-extrabold">
+          <div className="text-2xl">B</div>
+          <div className="text-2xl">-</div>
+          <div className="text-2xl">0</div>
+          <div className="text-2xl">0</div>
+          <div className="text-2xl">0</div>
+        </div>
+        <div className="flex justify-around gap-1 border-gray-300 bg-gray-100 p-3 font-extrabold">
+          <div className="text-2xl">C</div>
+          <div className="text-2xl">-</div>
+          <div className="text-2xl">0</div>
+          <div className="text-2xl">0</div>
+          <div className="text-2xl">0</div>
+        </div>
+        <div className="flex justify-around gap-1 border-gray-300 bg-gray-100 p-3 font-extrabold">
+          <div className="text-2xl">D</div>
+          <div className="text-2xl">-</div>
+          <div className="text-2xl">0</div>
+          <div className="text-2xl">0</div>
+          <div className="text-2xl">0</div>
+        </div>
       </div>
       <div className="grid grid-flow-col grid-cols-2">
         <div className="">
@@ -57,7 +77,7 @@ export default function Home() {
           <div>
             <span className="font-bold">Fecha del sorteo:</span>
             <br />
-            {tickets._drawDate}
+            {"tickets._drawDate"}
           </div>
           <div>
             <span className="font-bold">Valor del boleto:</span> Q100

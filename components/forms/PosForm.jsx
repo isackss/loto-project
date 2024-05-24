@@ -2,10 +2,12 @@
 
 /* import { PosSchema } from "@/lib/validations"; */
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-const PosForm = ({ mongoUserId }) => {
+const PosForm = () => {
   const [playSerie, setPlaySerie] = useState("");
   const [plays, setPlays] = useState([]);
+  const router = useRouter();
 
   /* Agregar serie a la jugada */
   const handleAddSerie = (e) => {
@@ -31,7 +33,7 @@ const PosForm = ({ mongoUserId }) => {
         userPlay = "0" + userPlay;
       }
     } else {
-      alert("Introduzca solo números");
+      alert("Introduzca sólo números");
       return;
     }
 
@@ -61,7 +63,10 @@ const PosForm = ({ mongoUserId }) => {
 
   /* Creación del ticket */
 
-  const handleTicketSubmit = () => {};
+  const handleTicketSubmit = () => {
+    confirm("Se va a generar el ticket. Presione Aceptar para confirmar");
+    router.push("/pos/ticket/1");
+  };
 
   return (
     <>
