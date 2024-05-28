@@ -21,8 +21,8 @@ const PosForm = () => {
   const handleAddPlay = (e) => {
     e.preventDefault();
 
-    const playField = document.getElementById("play");
-    let userPlay = playField.value;
+    const playInput = document.getElementById("play");
+    let userPlay = playInput.value;
     const date = Date.now();
 
     /* Validar formato de jugada */

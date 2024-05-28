@@ -7,10 +7,10 @@ import MobileNav from "./MobileNav";
 
 const Navbar = () => {
   return (
-    <nav className="flex-between background-light900_dark200 fixed z-50 w-full gap-5 p-6 shadow-light-300 dark:shadow-none">
+    <nav className="flex-between background-light900_dark200 fixed z-50 w-full gap-5 px-6 py-4 shadow-light-300 dark:shadow-none">
       <Link href="/" className="flex items-center gap-1">
         <Image
-          src="/assets/img/logo_loto.png"
+          src="/assets/img/logo_loto2.png"
           width={65}
           height={65}
           alt="logo"

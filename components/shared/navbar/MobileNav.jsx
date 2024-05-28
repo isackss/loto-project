@@ -68,16 +68,16 @@ const MobileNav = () => {
       >
         <Link href="/" className="flex items-center gap-1">
           <Image
-            src="/assets/img/logo_loto.png"
-            width={23}
-            height={23}
+            src="/assets/img/logo_loto2.png"
+            width={63}
+            height={63}
             alt="logo"
           />
           <p className="h2-bold text-dark100_light900 font-spaceGrotesk">
             Project <span className="text-primary-500">Loto</span>
           </p>
         </Link>
-        <div className="flex h-full flex-col justify-between border">
+        <div className="flex h-full flex-col justify-between">
           <SheetClose asChild>
             <NavContent />
           </SheetClose>
